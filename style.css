@@ -175,6 +175,14 @@ h1 {
     color: var(--soft-gold);
 }
 
+.khutbah-small {
+    color: var(--soft-gold);
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    font-style: italic;
+    opacity: 0.9;
+}
+
 .khutbah {
     font-family: 'Lateef', serif;
     font-size: 2.2rem;
