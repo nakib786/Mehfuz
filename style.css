@@ -24,8 +24,142 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow-x: hidden;
+    overflow: hidden;
+    /* Locked until curtains open */
     position: relative;
+}
+
+/* Curtain Loader */
+.curtain-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.curtain-panel {
+    width: 50%;
+    height: 100%;
+    background: url('al_mehfuz_background.png') no-repeat;
+    background-size: 200% 100%;
+    position: relative;
+    z-index: 1;
+    filter: brightness(0.4) contrast(1.2);
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.9);
+    transition: transform 1.8s cubic-bezier(1, 0, 0, 1);
+}
+
+.curtain-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--soft-gold), transparent);
+    z-index: 2;
+}
+
+.curtain-panel.left::before {
+    right: 0;
+}
+
+.curtain-panel.right::before {
+    left: 0;
+}
+
+/* Fabric fold effect */
+.curtain-panel::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right,
+            rgba(0, 0, 0, 0.3) 0%,
+            transparent 5%,
+            rgba(0, 0, 0, 0.1) 10%,
+            transparent 15%,
+            rgba(0, 0, 0, 0.2) 20%,
+            transparent 25%,
+            rgba(0, 0, 0, 0.1) 30%,
+            transparent 35%);
+    background-size: 50% 100%;
+}
+
+.curtain-panel.left {
+    background-position: 0% 50%;
+    border-right: 1px solid var(--soft-gold);
+    transform-origin: left;
+    animation: openLeft 2.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    animation-delay: 1.5s;
+}
+
+.curtain-panel.right {
+    background-position: 100% 50%;
+    border-left: 1px solid var(--soft-gold);
+    transform-origin: right;
+    animation: openRight 2.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    animation-delay: 1.5s;
+}
+
+/* Loader Text */
+.loader-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+    animation: fadeOutLoader 1.2s cubic-bezier(1, 0, 0, 1) forwards;
+    animation-delay: 1.2s;
+}
+
+.bismillah-loader {
+    font-family: 'Lateef', serif;
+    font-size: 5rem;
+    color: var(--soft-gold);
+    text-shadow: 0 0 40px rgba(212, 175, 55, 0.8);
+    animation: textPulse 2.5s infinite ease-in-out;
+}
+
+@keyframes textPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+}
+
+@keyframes openLeft {
+    to {
+        transform: translateX(-100%) skewX(2deg);
+    }
+}
+
+@keyframes openRight {
+    to {
+        transform: translateX(100%) skewX(-2deg);
+    }
+}
+
+@keyframes fadeOutLoader {
+    to {
+        opacity: 0;
+        transform: translate(-50%, -60%) scale(1.1);
+        visibility: hidden;
+    }
 }
 
 /* Background Image Overlay */
@@ -66,13 +200,14 @@ body::before {
     text-align: center;
     position: relative;
     z-index: 1;
-    animation: fadeInScale 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: fadeInScale 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 1.7s;
 }
 
 @keyframes fadeInScale {
     0% {
         opacity: 0;
-        transform: scale(0.95) translateY(20px);
+        transform: scale(0.9) translateY(30px);
     }
 
     100% {
