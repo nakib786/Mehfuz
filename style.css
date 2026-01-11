@@ -120,6 +120,15 @@ body {
     animation-delay: 1.2s;
 }
 
+
+.loader-logo {
+    width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6));
+    animation: textPulse 2.5s infinite ease-in-out;
+}
+
 .bismillah-loader {
     font-family: 'Lateef', serif;
     font-size: 5rem;
@@ -214,6 +223,11 @@ body::before {
         opacity: 1;
         transform: scale(1) translateY(0);
     }
+}
+
+.site-logo {
+    width: 120px;
+    height: auto;
 }
 
 .header-icon {
